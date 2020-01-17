@@ -36,4 +36,3 @@ def moralize(bn):
     for item in bn:
         link.add([idx for idx, i in enumerate(item) if i==1])
     for item in link:
-        
