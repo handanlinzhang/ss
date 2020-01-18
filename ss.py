@@ -32,7 +32,21 @@ def buildct(G, order,i,link):
     return ct
 
 def moralize(bn):
-    link=[]
+    """Construct the moral graph from bayesian network
+
+    :param bn: the adjacency matrix of bayesian network
+    :return: moral graph of the bayesian network
+    """
+    moral_graph = copy.deepcopy(bn)
+    parents=[]
+
     for item in bn:
-        link.add([idx for idx, i in enumerate(item) if i==1])
-    for item in link:
+        parents.add([idx for idx, i in enumerate(item) if i==1])
+    for item in parents:
+        for s in item:
+            for e in item:
+                if s != e:
+                    moral_graph[s][e] = 1
+
+    return moral_graph
+
